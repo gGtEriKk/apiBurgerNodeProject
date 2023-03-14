@@ -1,9 +1,11 @@
 const projectBurg = require('express')
 const uuid = require('uuid')
-const port = 3000
+const port = 3002
+const cors = require('cors')
 
 const api = projectBurg()
 api.use(projectBurg.json())
+api.use(cors())
 
 const orders = []
 
@@ -68,7 +70,7 @@ api.patch('/order/:id/', checkOrderId, methodAndUrl, (request, response) => {
     const index = request.orderIndex
 
     const readyOrder = orders[index]
-    readyOrder.status = "Pronto"
+    readyOrder.status = "Pedido pronto!" 
     orders[index] = readyOrder
 
     return response.json(readyOrder)
